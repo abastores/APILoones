@@ -1,4 +1,13 @@
-Django==2.2.2
+# Django
+Django==2.2.3
 djangorestframework==3.9.4
 django-cors-headers==3.0.1
+
+# Database
 mysqlclient==1.4.2.post1
+
+# Scraping
+requests==2.22.0
+beautifulsoup4==4.7.1
+
+# Others
