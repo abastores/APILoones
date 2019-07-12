@@ -31,7 +31,8 @@ class MapGob(ScrapingBase):
 
     def __init__(self, subcategory_name, url, *args, **kwargs):
         self.subcategory = SubCategory.objects.get(name=subcategory_name)
-        self.month_number = 0
+        self.month_number = None # useless
+        self.measure = None
 
         super().__init__(url)
 
@@ -40,6 +41,7 @@ class MapGob(ScrapingBase):
 
     def start_scraping(self):
         self.init_subcategory(self.subcategory)
+        self.measure = self.get_measure_from_thead()
         for row in self.get_rows_from_tbody():
             row_data = self.get_celds_from_row(row)
             week_number, self.month_number = self.get_week_number_and_month_number(row_data['week'])
@@ -47,6 +49,7 @@ class MapGob(ScrapingBase):
             for data in dict(itertools.islice(row_data.items(), 1, 4)).items():
                 data = data[1]
                 if data[1] is not None:
+                    data[1] = data[1] * 10 if self.measure == '(euros / 100 kg)' else data[1]     # Check to convert (euros / 100 kg) to (euros / Tonelada)
                     self.create_price_data(subcategory=self.subcategory, price=data[1], date=self.get_date_range_from_week(data[0], week_number))
 
     # SCRAPING METHODS
@@ -84,6 +87,12 @@ class MapGob(ScrapingBase):
         thead = self.get_theads_from_table()[3]
         year_heads = thead.find('tr').find_all('th', recursive=False)[2:]
         return [year_head.find('div').find('span', attrs={'class': 'tabla_texto_normal'}).text.split('/')[0] for year_head in year_heads]
+
+    # Get Measure
+    def get_measure_from_thead(self):
+        label_measure = self.get_theads_from_table()[0].find('tr').find('th').find('div').find('span').text
+        measure = label_measure[label_measure.find('('):]
+        return measure
 
     # Get Week Label in Row
     def get_week_number_and_month_number(self, label_week):

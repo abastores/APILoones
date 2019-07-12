@@ -96,4 +96,5 @@ class ScrapingBase(ABC):
         'Oc.': 10,
         'Nv.': 11,
         'Dc.': 12,
+        '': None
     }[month_abrv]

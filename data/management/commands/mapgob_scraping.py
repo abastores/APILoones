@@ -6,6 +6,8 @@
      - White Wine // Vino blanco sin DOP/IGP
      - Shell Rice // Arroz cáscara
      - Barley Feed // Cebada pienso
+     - Virgin Olive Oil (0.8º A 2º) // Aceite de Oliva Virge
+     - Lampante Olive Oil (+2º) // Aceite de Oliva Lampante
      - Soft Bread Wheat // Trigo blando panificable
 """
 
@@ -29,6 +31,8 @@ class Command(BaseCommand):
     BARLEY_FEED_CODE = 2
     SHELL_RICE_CODE = 4
     RED_WINE_CODE = 7
+    VIRGIN_OLIVE_OIL_CODE = 8
+    LAMPANTE_OLIVE_OIL_CODE = 9
     WHITE_WINE_CODE = 6
              
     # SubCategories URLS
@@ -36,8 +40,10 @@ class Command(BaseCommand):
         ('Red Wine', DATA_URL.format(RED_WINE_CODE)),
         ('White Wine', DATA_URL.format(WHITE_WINE_CODE)),
         ('Shell Rice', DATA_URL.format(SHELL_RICE_CODE)),
-        ('Barley Feed', DATA_URL.format(BARLEY_FEED_CODE)),
+        ('Virgin Olive Oil', DATA_URL.format(VIRGIN_OLIVE_OIL_CODE)),
+        ('Lampante Olive Oil', DATA_URL.format(LAMPANTE_OLIVE_OIL_CODE)),
         ('Soft Bread Wheat', DATA_URL.format(SOFT_BREAD_WHEAT_CODE)),
+        ('Barley Feed', DATA_URL.format(BARLEY_FEED_CODE)),
     ]
 
     def add_arguments(self, parser):
