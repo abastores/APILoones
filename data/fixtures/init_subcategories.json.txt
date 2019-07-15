@@ -1,0 +1,74 @@
+[
+  {
+    "model": "data.subcategory",
+    "pk": 1,
+    "fields": {
+      "name": "Extra Virgin Olive Oil",
+      "description": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "data.subcategory",
+    "pk": 2,
+    "fields": {
+      "name": "Virgin Olive Oil",
+      "description": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "data.subcategory",
+    "pk": 3,
+    "fields": {
+      "name": "Lampante Olive Oil",
+      "description": "",
+      "category": 1
+    }
+  },
+  {
+    "model": "data.subcategory",
+    "pk": 4,
+    "fields": {
+      "name": "Red Wine",
+      "description": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "data.subcategory",
+    "pk": 5,
+    "fields": {
+      "name": "White Wine",
+      "description": "",
+      "category": 2
+    }
+  },
+  {
+    "model": "data.subcategory",
+    "pk": 6,
+    "fields": {
+      "name": "Shell Rice",
+      "description": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "data.subcategory",
+    "pk": 7,
+    "fields": {
+      "name": "Soft Bread Wheat",
+      "description": "",
+      "category": 3
+    }
+  },
+  {
+    "model": "data.subcategory",
+    "pk": 8,
+    "fields": {
+      "name": "Barley Feed",
+      "description": "",
+      "category": 3
+    }
+  }
+]
