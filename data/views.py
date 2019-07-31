@@ -24,7 +24,7 @@ class SubCategoryViewSet(viewsets.ModelViewSet):
         return Response(
             [
                 {'name': subcategory.name,
-                 'price': dataprice.price, 
+                 'price': round(dataprice.price, 2), 
                  'date': dataprice.date
                 } for dataprice in DataPrice.objects.filter(subcategory=subcategory).order_by('date')
             ],

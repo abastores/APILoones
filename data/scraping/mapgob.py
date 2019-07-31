@@ -86,7 +86,12 @@ class MapGob(ScrapingBase):
     def get_years(self):
         thead = self.get_theads_from_table()[3]
         year_heads = thead.find('tr').find_all('th', recursive=False)[2:]
-        return [year_head.find('div').find('span', attrs={'class': 'tabla_texto_normal'}).text.split('/')[0] for year_head in year_heads]
+        
+        years = []
+        for year_head in year_heads:
+            year_head = year_head.find('div').find('span', attrs={'class': 'tabla_texto_normal'}).text
+            years.append(year_head[:2] + year_head[-2:])
+        return years
 
     # Get Measure
     def get_measure_from_thead(self):
