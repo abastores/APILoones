@@ -34,6 +34,7 @@ SECRET_KEY = '7_vpw2m(fguhyno*5l2th1y%-7nxb*khqsp#69n0r%guv=zg)q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Toca aqui Sergi
 ALLOWED_HOSTS = []
 
 
@@ -77,6 +78,7 @@ ALLOWED_HOSTS = ['*']
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',    # React App.
+    'https://marketsdata.loones.es'
 ]
 
 # CORS_ORIGIN_REGEX_WHITELIST = [

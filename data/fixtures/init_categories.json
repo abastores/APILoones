@@ -1,0 +1,26 @@
+[
+  {
+    "model": "data.category",
+    "pk": 1,
+    "fields": {
+      "name": "Oil",
+      "description": ""
+    }
+  },
+  {
+    "model": "data.category",
+    "pk": 2,
+    "fields": {
+      "name": "Wine",
+      "description": ""
+    }
+  },
+  {
+    "model": "data.category",
+    "pk": 3,
+    "fields": {
+      "name": "Legumbre",
+      "description": ""
+    }
+  }
+]
