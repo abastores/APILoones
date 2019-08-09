@@ -82,6 +82,13 @@ class ScrapingBase(ABC):
         lastdayofweek = firstdayofweek + timedelta(days=6.9)
         return firstdayofweek #, lastdayofweek
 
+    # https://stackoverflow.com/questions/17087314/get-date-from-week-number
+    def get_date_by_year_and_number_week(self, year, week_number):
+        if year != []:
+            string_date = "{0}-W{1}".format(str(year), str(week_number))
+            return datetime.strptime(string_date + '-1', "%Y-W%W-%w")
+        return None
+
     def get_number_month_by_month_abrv(self, month_abrv):
         return {
         'En.': 1,
