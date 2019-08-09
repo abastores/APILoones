@@ -31,8 +31,12 @@ class MapGob(ScrapingBase):
 
     def __init__(self, subcategory_name, url, *args, **kwargs):
         self.subcategory = SubCategory.objects.get(name=subcategory_name)
-        self.month_number = None # useless
+        self.month_number = None
+        self.week_number = None
         self.measure = None
+        self.year_change = False
+
+        self.clean_data = []
 
         super().__init__(url)
 
@@ -42,15 +46,30 @@ class MapGob(ScrapingBase):
     def start_scraping(self):
         self.init_subcategory(self.subcategory)
         self.measure = self.get_measure_from_thead()
+
+        # Get bulk of Data Price's
+        data = []
         for row in self.get_rows_from_tbody():
-            row_data = self.get_celds_from_row(row)
-            week_number, self.month_number = self.get_week_number_and_month_number(row_data['week'])
-            
-            for data in dict(itertools.islice(row_data.items(), 1, 4)).items():
-                data = data[1]
-                if data[1] is not None:
-                    data[1] = data[1] * 10 if self.measure == '(euros / 100 kg)' else data[1]     # Check to convert (euros / 100 kg) to (euros / Tonelada)
-                    self.create_price_data(subcategory=self.subcategory, price=data[1], date=self.get_date_range_from_week(data[0], week_number))
+            data += self.get_celds_from_row(row)
+
+        self.clean_data = self.order_data_prices_by_date(data)
+        self.perform_linear_insertion()
+
+    def perform_linear_insertion(self):
+        for data_line in self.clean_data:
+            if data_line[2] != None:
+                data_line = self.prepare_data_line_to_insertion(data_line)
+                if data_line[1] != []:
+                    self.create_price_data(subcategory=self.subcategory, date=data_line[0], price=data_line[1])
+
+    def prepare_data_line_to_insertion(self, data_line):
+        clean_data_line = []
+        if self.get_week_number_and_month_number(data_line[0]) != None:
+            self.week_number, self.month_number = self.get_week_number_and_month_number(data_line[0])
+        clean_data_line.append(self.get_date_by_year_and_number_week(self.get_year(data_line[1]), self.week_number))
+        clean_data_line.append(data_line[2] * 10 if self.measure == '(euros / 100 kg)' else data_line[2])    # Convert from 100kg to T
+        return clean_data_line
+
 
     # SCRAPING METHODS
     # -------------------------------------------------
@@ -73,13 +92,12 @@ class MapGob(ScrapingBase):
 
     # Get Celds
     def get_celds_from_row(self, row):
-        celds = row.find_all('td', recursive=False)
-        result = {
-            'week': celds[1].find('span').text
-        }
+        celds = [celd for celd in reversed(row.find_all('td', recursive=False))]
+        label_week = celds[3].find('span').text
 
-        for i, year in enumerate(self.get_years()):
-            result['year' + str(i+1)] = [int(year), self.format_to_float(celds[2+i].find('span').text)]  # 2 + i => Explain 2 positions in advance + the position of the years array.
+        result = []
+        for i, year_range in enumerate(reversed(self.get_years())):
+            result.append([label_week, year_range, self.format_to_float(celds[i].find('span').text)])
         return result
 
     # Get Years from theads 
@@ -90,8 +108,20 @@ class MapGob(ScrapingBase):
         years = []
         for year_head in year_heads:
             year_head = year_head.find('div').find('span', attrs={'class': 'tabla_texto_normal'}).text
-            years.append(year_head[:2] + year_head[-2:])
+            years.append(year_head)
         return years
+
+    # Get Year from range based on Month number
+    def get_year(self, year_range):
+
+        # If is Jan. then reinitialice the cycle otherwise if is Dec. get the old year. 
+        if self.month_number == 1:
+            self.year_change = True
+        elif self.month_number == 12 or year_range == []:
+            self.year_change = False
+        
+        year = year_range[:2] + year_range[-2:] if self.year_change else year_range[:-3]
+        return year
 
     # Get Measure
     def get_measure_from_thead(self):
@@ -101,14 +131,22 @@ class MapGob(ScrapingBase):
 
     # Get Week Label in Row
     def get_week_number_and_month_number(self, label_week):
-        label_week = [label.strip() for label in label_week.split('-')]
-        if len(label_week) == 2:
-            month_number = self.get_number_month_by_month_abrv(label_week[1])
-        else:
-            month_number = self.month_number
+        if label_week != []:
+            label_week = [label.strip() for label in label_week.split('-')]
+            if len(label_week) == 2:
+                month_number = self.get_number_month_by_month_abrv(label_week[1])
+            else:
+                month_number = self.month_number
 
-        return int(label_week[0]), month_number
+            return int(label_week[0]), month_number
+        return None
 
-    def get_avg_price_per_subcategory(self, row_number):
-        row = self.get_row_per_subcategory(row_number)
-        return self.get_avg_price_by_row(row)
+    # Order the Data Price by Date 
+    def order_data_prices_by_date(self, data):
+        ordered_data_prices = []
+        for i, year_range in enumerate(reversed(self.get_years())):
+            ordered_data_prices.append([[], [], []])
+            for line_data in data:
+                if year_range == line_data[1]:
+                    ordered_data_prices.append(line_data)
+        return ordered_data_prices
