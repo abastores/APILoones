@@ -5,7 +5,9 @@
     "fields": {
       "name": "Extra Virgin Olive Oil",
       "description": "",
-      "category": 1
+      "category": 1,
+      "add_date": "2019-06-16 14:17",
+      "update_date": "2019-06-16 14:17"
     }
   },
   {
@@ -14,7 +16,9 @@
     "fields": {
       "name": "Virgin Olive Oil",
       "description": "",
-      "category": 1
+      "category": 1,
+      "add_date": "2019-06-16 14:17",
+      "update_date": "2019-06-16 14:17"
     }
   },
   {
@@ -23,7 +27,9 @@
     "fields": {
       "name": "Lampante Olive Oil",
       "description": "",
-      "category": 1
+      "category": 1,
+      "add_date": "2019-06-16 14:17",
+      "update_date": "2019-06-16 14:17"
     }
   },
   {
@@ -32,7 +38,9 @@
     "fields": {
       "name": "Red Wine",
       "description": "",
-      "category": 2
+      "category": 2,
+      "add_date": "2019-06-16 14:17",
+      "update_date": "2019-06-16 14:17"
     }
   },
   {
@@ -41,7 +49,9 @@
     "fields": {
       "name": "White Wine",
       "description": "",
-      "category": 2
+      "category": 2,
+      "add_date": "2019-06-16 14:17",
+      "update_date": "2019-06-16 14:17"
     }
   },
   {
@@ -50,7 +60,9 @@
     "fields": {
       "name": "Shell Rice",
       "description": "",
-      "category": 3
+      "category": 3,
+      "add_date": "2019-06-16 14:17",
+      "update_date": "2019-06-16 14:17"
     }
   },
   {
@@ -59,7 +71,9 @@
     "fields": {
       "name": "Soft Bread Wheat",
       "description": "",
-      "category": 3
+      "category": 3,
+      "add_date": "2019-06-16 14:17",
+      "update_date": "2019-06-16 14:17"
     }
   },
   {
@@ -68,7 +82,9 @@
     "fields": {
       "name": "Barley Feed",
       "description": "",
-      "category": 3
+      "category": 3,
+      "add_date": "2019-06-16 14:17",
+      "update_date": "2019-06-16 14:17"
     }
   }
 ]

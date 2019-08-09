@@ -4,7 +4,9 @@
     "pk": 1,
     "fields": {
       "name": "Oil",
-      "description": ""
+      "description": "",
+      "add_date": "2019-06-16 14:17",
+      "update_date": "2019-06-16 14:17"
     }
   },
   {
@@ -12,7 +14,9 @@
     "pk": 2,
     "fields": {
       "name": "Wine",
-      "description": ""
+      "description": "",
+      "add_date": "2019-06-16 14:17",
+      "update_date": "2019-06-16 14:17"
     }
   },
   {
@@ -20,7 +24,9 @@
     "pk": 3,
     "fields": {
       "name": "Legumbre",
-      "description": ""
+      "description": "",
+      "add_date": "2019-06-16 14:17",
+      "update_date": "2019-06-16 14:17"
     }
   }
 ]
