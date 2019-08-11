@@ -48,6 +48,8 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'corsheaders',
+    'django_celery_beat',
+    'django_celery_results',
 ]
 
 PROJECT_APPS = [
@@ -155,6 +157,21 @@ USE_L10N = True
 
 # USE_TZ = True
 
+# CELERY + REDIS + DJANGO
+# ------------------------------------------------------------------------------
+
+# DJANGO CELERY CONFIGURATION
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE
+
+# DJANGO CELERY RESULTS - Issues with mysql
+# https://github.com/celery/django-celery-results#issues-with-mysql
+DJANGO_CELERY_RESULTS_TASK_ID_MAX_LENGTH=191
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

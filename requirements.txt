@@ -2,6 +2,8 @@
 Django==2.2.3
 djangorestframework==3.9.4
 django-cors-headers==3.0.1
+django-celery-beat==1.5.0
+django-celery-results==1.1.2
 
 # Database
 mysqlclient==1.4.2.post1
@@ -11,3 +13,5 @@ requests==2.22.0
 beautifulsoup4==4.7.1
 
 # Others
+celery==4.3.0
+redis==3.3.6

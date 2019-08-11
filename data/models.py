@@ -26,4 +26,4 @@ class DataPrice(models.Model):
     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.price 
+        return str(self.price)
