@@ -10,7 +10,13 @@ __copyright__ = "Copyright (c) 2019 Loones - Rafael García Cuéllar"
 __license__ = "Loones"
 
 from django.core.management.base import BaseCommand, CommandError
-from data.scraping.mapgob import MapGob 
+from django.db import connection
+from data.scraping.mapgob import MapGob
+import os
+
+module_dir = os.path.dirname(__file__)  # get current directory
+
+FILE_PATH = os.path.join(module_dir.replace('management/commands', ''), 'scraping/delete_bad_data_prices.sql')
 
 class Command(BaseCommand):
     help = 'Scraping https://www.mapa.gob.es/app/precios-medios-nacionales'
@@ -38,10 +44,24 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         pass
 
+    def delete_wrong_dataprices(self):
+        print("Deleting wrong DataPrices...")
+        with connection.cursor() as cursor:
+            with open(FILE_PATH) as fp:
+                for line in fp:
+                    cursor.execute(line)
+                    print('\t' + line)
+            fp.close()
+        cursor.close()
+
+        print("Successfully deleted wrong DataPrices ! ")
+
     def handle(self, *args, **options):
         for subcategory in self.SUBCATEGORIES_URLS:
             mapgob = MapGob(subcategory_name=subcategory[0], url=subcategory[1])
+            mapgob.delete_old_data()
             mapgob.init_scraping()
             mapgob.start_scraping()
             mapgob.end_scraping()
-        
+        self.delete_wrong_dataprices()
+            

@@ -23,9 +23,9 @@ import requests as rq
 from bs4 import BeautifulSoup
 
 from data.models import DataPrice
-from .base import ScrapingBase
-
 from data.models import SubCategory
+
+from .base import ScrapingBase
 
 class MapGob(ScrapingBase):
 
@@ -54,6 +54,11 @@ class MapGob(ScrapingBase):
 
         self.clean_data = self.order_data_prices_by_date(data)
         self.perform_linear_insertion()
+
+    def delete_old_data(self):
+        print("Deleting Old Data from: {}".format(self.subcategory.name))
+        deleted = DataPrice.objects.filter(subcategory=self.subcategory).delete()
+        print("Successfully deleted {} records".format(deleted[0]))
 
     def perform_linear_insertion(self):
         for data_line in self.clean_data:
