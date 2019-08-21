@@ -21,8 +21,6 @@ from rest_framework import routers
 from data import views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
 router.register(r'categories', views.CategoryViewSet)
 router.register(r'subcategories', views.SubCategoryViewSet)
 router.register(r'dataprices', views.DataPriceViewSet)
