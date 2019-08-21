@@ -19,7 +19,8 @@ def mapgob_periodic_scraping_data():
     with connection.cursor() as cursor:
         with open(FILE_PATH) as fp:
             for line in fp:
-                cursor.execute(line)
+                if len(line) != 0: 
+                    cursor.execute(line)
         fp.close()
     cursor.close()
 
