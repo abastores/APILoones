@@ -176,14 +176,15 @@ DJANGO_CELERY_RESULTS_TASK_ID_MAX_LENGTH=191
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_ROOT = APPS_DIR + "/static/"
+STATIC_ROOT = join(BASE_DIR, 'static')
 
 # https://docs.djangoproject.com/en/2.2/ref/settings/#static-url
 STATIC_URL = '/static/'
 
 # https://docs.djangoproject.com/en/2.2/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = (
-    os.path.join(ROOT_DIR, "static"),
+# https://stackoverflow.com/questions/25990957/django-collectstatic-no-such-file-or-directory
+#    os.path.join(ROOT_DIR, "static"),
 )
 
 # https://docs.djangoproject.com/en/2.2/ref/settings/#staticfiles-finders
