@@ -91,4 +91,6 @@ db.sqlite3
 # Celery
 celerybeat.pid
 dump.rdb
-
+django.bak
+django.dat
+django.dir
