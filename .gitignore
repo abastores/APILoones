@@ -94,3 +94,6 @@ dump.rdb
 django.bak
 django.dat
 django.dir
+
+# Static Files
+static/
