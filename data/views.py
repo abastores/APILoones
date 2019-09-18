@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from django.shortcuts import get_object_or_404
@@ -25,7 +26,7 @@ class SubCategoryViewSet(viewsets.ModelViewSet):
             [
                 {'name': subcategory.name,
                  'price': round(dataprice.price, 2), 
-                 'date': dataprice.date
+                 'date': dataprice.date.date()
                 } for dataprice in DataPrice.objects.filter(subcategory=subcategory).order_by('date')
             ],
         status=status.HTTP_200_OK)
