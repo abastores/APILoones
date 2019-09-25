@@ -89,8 +89,10 @@ local_settings.py
 db.sqlite3
 
 # Celery
+celery.logs
 celerybeat.pid
 dump.rdb
+django
 django.bak
 django.dat
 django.dir
