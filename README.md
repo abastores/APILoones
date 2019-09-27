@@ -87,7 +87,7 @@ Follow the next steps in order to up to date the API loones in Procuction server
 #### Mega command: 
 
 ```bash
-    cd /CODE/loones && git pull && chow chown -R www-data:www-data /CODE/loones 
+    cd /CODE/loones && git pull && chown -R www-data:www-data /CODE/loones 
 ```
 
 <!-- USAGE EXAMPLES -->
