@@ -72,6 +72,7 @@ Follow the next steps in order to up to date the API loones in Procuction server
 2. Go to folder that contains the APILoones code:  `cd <folder-path>`
 3. Get all the new changes from the repository. `git pull`
 4. Rewrite the user-permissions to the APILoones files `chown -R www-data:www-data <folder-path>`
+5. Finally Run. `npm run build`
 
 #### Note:
 * `folder-path` could be the following paths:
